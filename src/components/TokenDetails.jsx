@@ -14,6 +14,7 @@ function TokenDetails({ tokenAddress }) {
                 //parse the data
                 if (pairsResponse && pairsResponse.pairs && pairsResponse.pairs.length > 0) {
                     const pair = pairsResponse.pairs[0];
+                    console.log(pair)
                     setDetails({
                         baseToken: pair.baseToken.name,
                         baseTokenSymbol: pair.baseToken.symbol,
@@ -25,9 +26,9 @@ function TokenDetails({ tokenAddress }) {
                         liquidity: pair.liquidity,
                         fdv: pair.fdv,
                         pairCreatedAt: pair.pairCreatedAt,
-                        imageUrl: pair.info.imageUrl,
-                        websites: pair.info.websites,
-                        socials: pair.info.socials
+                        imageUrl: pair.info?.imageUrl,
+                        websites: pair.info?.websites,
+                        socials: pair.info?.socials
                     });
                 } else {
                     console.error('No pairs found for the token address:', tokenAddress);
@@ -57,11 +58,11 @@ function TokenDetails({ tokenAddress }) {
                     <p><strong>Liquidity (USD):</strong> {details.liquidity.usd}</p>
                     <p><strong>FDV:</strong> {details.fdv}</p>
                     <p><strong>Pair Created At:</strong> {new Date(details.pairCreatedAt).toLocaleString()}</p>
-                    <img src={details.imageUrl} alt="Token" className="mt-4 m-auto" />
+                    { details.imageUrl && <img src={details.imageUrl} alt="Token" className="mt-4 m-auto" /> }
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold">Websites</h3>
                         <ul className="list-disc list-inside">
-                            {details.websites.map((website, index) => (
+                            {details.websites?.map((website, index) => (
                                 <li key={index}>
                                     <a href={website.url}>{website.label}</a>
                                 </li>
@@ -71,7 +72,7 @@ function TokenDetails({ tokenAddress }) {
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold">Socials</h3>
                         <ul className="list-disc list-inside">
-                            {details.socials.map((social, index) => (
+                            {details.socials?.map((social, index) => (
                                 <li key={index}>
                                     <a href={social.url}>{social.type}</a>
                                 </li>
