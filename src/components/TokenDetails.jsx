@@ -14,7 +14,6 @@ function TokenDetails({ tokenAddress }) {
                 //parse the data
                 if (pairsResponse && pairsResponse.pairs && pairsResponse.pairs.length > 0) {
                     const pair = pairsResponse.pairs[0];
-                    console.log(pair)
                     setDetails({
                         baseToken: pair.baseToken.name,
                         baseTokenSymbol: pair.baseToken.symbol,
